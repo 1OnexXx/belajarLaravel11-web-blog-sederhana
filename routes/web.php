@@ -16,9 +16,18 @@ Route::get('/about', function () {
     ]);
 });
 
-Route::get('/blog', function () {
-    return view('blog' , [
-        'title' => 'Blog'
+Route::get('/posts', function () {
+    return view('posts' , [
+        'title' => 'From the blog' , 'posts' => [
+            'title' => '',
+            'author' => '',
+            'body' => ''
+        ],
+        [
+            'title' => '',
+            'author' => '',
+            'body' => ''
+        ],
     ]);
 });
 
