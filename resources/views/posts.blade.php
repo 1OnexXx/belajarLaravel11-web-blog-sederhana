@@ -9,7 +9,10 @@
                 @foreach ($posts as $post)
                 <article class="flex max-w-xl flex-col items-start justify-between">
                     <div class="flex items-center gap-x-4 text-xs">
-                        <time datetime="2020-03-16" class="text-gray-500">Mar 16, 2020</time>
+                        <p class="text-gray-500">
+                            {{-- {{ $post->created_at ? $post->created_at->format('j F Y') : 'Tanggal tidak tersedia' }} --}}
+                            {{ $post->created_at ? $post->created_at->diffForHumans() : 'Tanggal tidak tersedia' }}
+                        </p>
                         <a href="#"
                             class="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100">horor</a>
                     </div>
