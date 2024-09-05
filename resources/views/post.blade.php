@@ -10,7 +10,11 @@
                 Published on {{ $post->created_at ? $post->created_at->diffForHumans() : 'waktu tidak tersedia' }}
                 {{-- carra 2 --}}
                 {{-- Published on {{ $post->created_at ? $post->created_at->format('j F Y') : 'waktu tidak tersedia' }}  --}}
-            {{ $post['author'] }}</p>
+                By 
+            <a href="/authors/{{ $post->author->id }}" class="hover:underline">
+                {{ $post->author->name }} 
+            </a>  
+        </p>
             <a href="/posts">&laquo; back to blog </a>
             <img src="https://via.placeholder.com/800x400" alt="Tailwind CSS" class="w-full h-auto rounded-lg mb-6">
 

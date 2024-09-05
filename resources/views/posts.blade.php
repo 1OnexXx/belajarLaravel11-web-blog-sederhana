@@ -31,9 +31,9 @@
                             alt="" class="h-10 w-10 rounded-full bg-gray-50">
                         <div class="text-sm leading-6">
                             <p class="font-semibold text-gray-900">
-                                <a href="#">
+                                <a href="/authors/{{ $post->author->id }}">
                                     <span class="absolute inset-0"></span>
-                                    {{ $post['author'] }}
+                                    {{ $post->author->name }}
                                 </a>
                             </p>
                             
