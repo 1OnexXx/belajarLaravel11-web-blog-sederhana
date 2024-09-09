@@ -13,8 +13,8 @@
                             {{-- {{ $post->created_at ? $post->created_at->format('j F Y') : 'Tanggal tidak tersedia' }} --}}
                             {{ $post->created_at ? $post->created_at->diffForHumans() : 'Tanggal tidak tersedia' }}
                         </p>
-                        <a href="#"
-                            class="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100">horor</a>
+                        <a href="/categories/{{ $post->category->slug }}"
+                            class="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100">{{ $post->category->name }}</a>
                     </div>
                     <div class="group relative">
                         <h3 class="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
@@ -31,7 +31,7 @@
                             alt="" class="h-10 w-10 rounded-full bg-gray-50">
                         <div class="text-sm leading-6">
                             <p class="font-semibold text-gray-900">
-                                <a href="/authors/{{ $post->author->id }}">
+                                <a href="/authors/{{ $post->author->username }}">
                                     <span class="absolute inset-0"></span>
                                     {{ $post->author->name }}
                                 </a>
