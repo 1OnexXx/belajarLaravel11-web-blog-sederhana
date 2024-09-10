@@ -1,50 +1,42 @@
 <x-layout>
-    <x-slot:title>{{ $title }}</x-slot:title>
+    <x-slot name="title">{{ $title }}</x-slot>
 
-    <div class="bg-white py-24 sm:py-32">
-        <div class="mx-auto max-w-7xl px-6 lg:px-8">
-            <div
-                class="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 border-t border-gray-200 pt-10 lg:mx-0 lg:max-w-none lg:grid-cols-3">
-
-                @foreach ($posts as $post)
-                <article class="flex max-w-xl flex-col items-start justify-between">
-                    <div class="flex items-center gap-x-4 text-xs">
-                        <p class="text-gray-500">
-                            {{-- {{ $post->created_at ? $post->created_at->format('j F Y') : 'Tanggal tidak tersedia' }} --}}
-                            {{ $post->created_at ? $post->created_at->diffForHumans() : 'Tanggal tidak tersedia' }}
-                        </p>
-                        <a href="/categories/{{ $post->category->slug }}"
-                            class="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100">{{ $post->category->name }}</a>
+    <div class="py-4 px-4 mx-auto max-w-screen-xl lg:py-8 lg:px-0">
+        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            @foreach ($posts as $post)
+                <article class="p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+                    <div class="flex justify-between items-center mb-5 text-gray-500">
+                        <span class="bg-{{ $post->category->color }}-200 text-primary-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
+                            <svg class="mr-1 w-3 h-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z"></path>
+                            </svg>
+                        <a href="/categories/{{ $post->category->slug }}">
+                            {{ $post->category->name }}
+                        </a>
+                        </span>
+                        {{-- <span class="text-sm">{{ $post->created_at ? $post->created_at->format('j F Y') : 'Tanggal tidak tersedia' }}</span>  --}}
+                        <span class="text-sm">{{ $post->created_at ? $post->created_at->diffForHumans() : 'Tanggal tidak tersedia' }}</span>
                     </div>
-                    <div class="group relative">
-                        <h3 class="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
-                            <a href="/posts/{{ $post['slug'] }}">
-                                <span class="absolute inset-0"></span>
-                                {{ $post['title'] }}
-                            </a>
-                        </h3>
-                        {{-- sudah ada elipsis jadi str::limit tidak terpake --}}
-                        <p class="mt-5 line-clamp-3 text-sm leading-6 text-gray-600">{{ Str::limit($post['body'],100) }}</p>
-                    </div>
-                    <div class="relative mt-8 flex items-center gap-x-4">
-                        <img src="https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                            alt="" class="h-10 w-10 rounded-full bg-gray-50">
-                        <div class="text-sm leading-6">
-                            <p class="font-semibold text-gray-900">
-                                <a href="/authors/{{ $post->author->username }}">
-                                    <span class="absolute inset-0"></span>
-                                    {{ $post->author->name }}
-                                </a>
-                            </p>
-                            
+                    <h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white hover:underline">
+                        <a href="/posts/{{ $post->slug }}">{{ $post->title }}</a>
+                    </h2>
+                    <p class="mb-5 font-light text-gray-500 dark:text-gray-400">{{ Str::limit($post->body, 200) }}</p>
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center space-x-3">
+                            <img class="w-7 h-7 rounded-full" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/jese-leos.png" alt="{{ $post->author->name }} avatar" />
+                            <span class="font-medium text-sm dark:text-white">
+                                <a href="/authors/{{ $post->author->username }}">{{ $post->author->name }}</a>
+                            </span>
                         </div>
+                        <a href="/posts/{{ $post->slug }}" class="inline-flex items-center font-medium text-primary-600 dark:text-primary-500 hover:underline">
+                            Read more
+                            <svg class="ml-2 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                            </svg>
+                        </a>
                     </div>
                 </article>
-                @endforeach
-                <!-- More posts... -->
-            </div>
+            @endforeach
         </div>
     </div>
-
-
 </x-layout>
